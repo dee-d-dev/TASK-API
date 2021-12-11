@@ -12,8 +12,8 @@ app.use(express.static("./views"));
 //routes
 app.use("/api/v1/tasks", tasks);
 
-app.use(errorHandlerMW);
 app.use(notFound);
+app.use(errorHandlerMW);
 
 const port = process.env.PORT;
 

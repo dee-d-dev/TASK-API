@@ -18,7 +18,6 @@ const getSingleTask = asyncWrapper(async (req, res, next) => {
 
   if (!task) {
     return next(createCustomError({ msg: `no task with ID: ${TaskID}` }, 404));
-
   }
   res.status(200).json({ task });
 });
@@ -32,7 +31,7 @@ const updateTask = asyncWrapper(async (req, res) => {
   });
 
   if (!updatedTask) {
-    res.status(500).json(`Can't find a task with the id: ${taskID}`);
+    return next(createCustomError({ msg: `no task with ID: ${TaskID}` }, 404));
   }
 
   res.status(200).json({ updatedTask });

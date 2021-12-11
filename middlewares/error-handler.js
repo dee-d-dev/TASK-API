@@ -1,6 +1,10 @@
-const errorHandlerMW = (err, req, res, next) =>{
-    console.log(err)
-    return res.status(500).json({msg: err.message}) 
-}
+const { CustomAPIError } = require("../errors/custom-error");
 
-module.exports = errorHandlerMW
+const errorHandlerMW = (err, req, res, next) => {
+  if (err instanceof CustomAPIError) {
+    return res.status(err.statusCode).json({ msg: err.msg });
+  }
+  return res.status(500).json({ msg: `Something went wrong` });
+};
+
+module.exports = errorHandlerMW;
